@@ -5,7 +5,7 @@
   "scripts": {
     "start": "NODE_ENV=development node ./bin/www",
     "api": "NODE_ENV=development nodemon ./bin/www",
-    "client": "NODE_ENV=development cd client && npm start",
+    "client": "NODE_ENV=development cd client && npx web",
     "dev": "NODE_ENV=development concurrently \"npm run api\" \" npm run client\" --kill-others --kill-others-on-fail "
   },
   "dependencies": {
