@@ -18,6 +18,7 @@ function buildDevLogger(){
       format: combine(
         timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
         errors({ stack: true }),
+        prettyPrint(),
         logFormat,
         json()
       ),
