@@ -7,7 +7,6 @@ import Footer from "./components/Footer";
 import Edit from "./components/Edit";
 import CreateForm from "./components/CreateForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./css/app.css";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
 const App = () => {
