@@ -8,12 +8,18 @@ import Edit from "./components/Edit";
 import CreateForm from "./components/CreateForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import { ColorModeContext, useMode } from "./theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 
 const App = () => {
+  const [theme, colorMode] = useMode();
   return (
     <React.Fragment>
+    
       <BrowserRouter>
+      
         <NavBar />
+        <ColorModeContext.Provider value={colorMode}
         <div id="main-content">
           <Routes>
             <Route path="/" element={<Main />} />
@@ -25,7 +31,7 @@ const App = () => {
             </Route>
           </Routes>
         </div>
-
+</ColorModeContext.Provider>
         <Footer />
       </BrowserRouter>
     </React.Fragment>
