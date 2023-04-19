@@ -1,7 +1,8 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,dotenv,node
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,linux,dotenv,node
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,linux,dotenv,text
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,node,linux,dotenv,text
 
+.txt
 ### dotenv ###
 .env
 
@@ -159,6 +160,16 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+### Text ###
+*.doc
+*.docx
+*.msg
+*.pages
+*.rtf
+*.txt
+*.wpd
+*.wps
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -178,7 +189,7 @@ dist
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,dotenv,node
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,linux,dotenv,text
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
