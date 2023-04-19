@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
     const navigate = useNavigate();
-    //use tge provided by react route
+    //use the provided by react route
     const handleLogout = (event) => {
         console.log("handleLogout");
         event.preventDefault();

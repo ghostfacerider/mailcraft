@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../css/main.css";
 import "font-awesome/css/font-awesome.min.css";
-import Card from "../dashboard/Card";
+import Card from "./Card";
 import dataService from "../../services/dataService";
 // import { useNavigate } from "react-router-dom";
 

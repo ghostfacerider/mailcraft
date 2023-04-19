@@ -6,6 +6,7 @@ import Footer from "./components/common/Footer";
 import { BrowserRouter } from "react-router-dom";
 
 import { ColorModeContext, useMode } from "./theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import Router from "./router";
 
@@ -16,9 +17,12 @@ const App = () => {
             <BrowserRouter>
                 <NavBar />
                 <ColorModeContext.Provider value={colorMode}>
+                <ThemeProvider theme={theme}>
+                <CssBaseline />
                     <div id="main-content">
                         <Router />
                     </div>
+                    </ThemeProvider>
                 </ColorModeContext.Provider>
                 <Footer />
             </BrowserRouter>
@@ -26,7 +30,4 @@ const App = () => {
     );
 };
 
-// const NotFound = () => {
-//   return <h1> Not found</h1>
-// }
 export default App;
