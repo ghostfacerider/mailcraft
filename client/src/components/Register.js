@@ -19,7 +19,6 @@ const Register = (props) => {
     console.log({ email, password, firstname, lastname });
     setErrors({});
 
-    // console.log("buttonClick_reg");
     //we will post the form data to the API for Autherntication
 
     authService.register({ email, password, firstname, lastname }, (error) => {
