@@ -8,8 +8,6 @@ const session = require("express-session");
 
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 var cors = require("cors");
 
 var winston = require("./config/index");
@@ -43,7 +41,7 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 app.use(
     session({
-        secret: "mysecret",
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
     })
