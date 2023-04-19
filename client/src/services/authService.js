@@ -3,7 +3,7 @@ import axios from "axios";
 class authService {
     signin(credentials, callback) {
         axios
-            .post(`http://localhost:3000/users/login`, credentials)
+            .post(`http://localhost:3001/users/login`, credentials)
             .then((response) => {
                 console.log(response);
                 if (response.status === 200) {
@@ -25,7 +25,7 @@ class authService {
 
     register(registrationData, callback) {
         axios
-            .post(`http://localhost:3000/users/register`, registrationData)
+            .post(`http://localhost:3001/users/register`, registrationData)
             .then((response) => {
                 if (response.status === 200) {
                     // store it
