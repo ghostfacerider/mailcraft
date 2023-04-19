@@ -5,7 +5,6 @@ var cookieParser = require("cookie-parser");
 var morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
-
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var cors = require("cors");
@@ -23,7 +22,7 @@ mongoose.connect(process.env.MONGO_DB);
 
 //import our rounters
 var indexRouter = require("./routes/api/index");
-var apiRouter = require("./routes/api/"); //api = api folder
+var apiRouter = require("./routes/api"); //api = api folder
 const { log } = require("console");
 
 var app = express();
