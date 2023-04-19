@@ -3,8 +3,9 @@ const buildDevLogger = require("./dev-logger");
 
 let logger = null;
 if (process.env.NODE_ENV === "development") {
-  logger = buildDevLogger();
+    logger = new buildDevLogger();
 } else {
-  logger = buildProLogger();
+    logger = new buildProLogger();
 }
+
 module.exports = logger;

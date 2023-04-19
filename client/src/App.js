@@ -12,30 +12,31 @@ import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 
 const App = () => {
-  const [theme, colorMode] = useMode();
-  return (
-    <React.Fragment>
-    
-      <BrowserRouter>
-      
-        <NavBar />
-        <ColorModeContext.Provider value={colorMode}
-        <div id="main-content">
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/register" element={<Register />} />
-            <Route element={<ProtectedRoutes />}>
-              <Route path="/create" element={<CreateForm />} />
-              <Route path="/edit/:id" element={<Edit />} />
-            </Route>
-          </Routes>
-        </div>
-</ColorModeContext.Provider>
-        <Footer />
-      </BrowserRouter>
-    </React.Fragment>
-  );
+    const [theme, colorMode] = useMode();
+    return (
+        <React.Fragment>
+            <BrowserRouter>
+                <NavBar />
+                <ColorModeContext.Provider value={colorMode}>
+                    <div id="main-content">
+                        <Routes>
+                            <Route path="/" element={<Main />} />
+                            <Route path="/signin" element={<SignIn />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route element={<ProtectedRoutes />}>
+                                <Route
+                                    path="/create"
+                                    element={<CreateForm />}
+                                />
+                                <Route path="/edit/:id" element={<Edit />} />
+                            </Route>
+                        </Routes>
+                    </div>
+                </ColorModeContext.Provider>
+                <Footer />
+            </BrowserRouter>
+        </React.Fragment>
+    );
 };
 
 // const NotFound = () => {

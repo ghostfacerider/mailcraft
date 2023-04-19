@@ -1,7 +1,7 @@
 const appRoot = require("app-root-path");
 const { func } = require("joi");
 const {format, createLogger, transports} = require("winston");
-const {timestamp, combine, printf, errors, json, simple, prettyPrint, metadata} = format;
+const {timestamp, combine, printf, errors, json, simple} = format;
 
 function buildDevLogger(){
   const logFormat = printf(({ level, message, timestamp, stack }) => {
@@ -10,15 +10,13 @@ function buildDevLogger(){
   // define the custom settings for each transport (file, console)
   const options = {
     file: {
-      level: "info",
+      level: "debug",
       filename: `${appRoot}/logs/app.log`,
       handleExceptions: true,
       maxsize: 5242880, // 5MB
       maxFiles: 5,
       format: combine(
         timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
-        metadata(),
-        prettyPrint(),
         errors({ stack: true }),
         logFormat,
         json()
@@ -30,8 +28,6 @@ function buildDevLogger(){
       format: combine(
         format.colorize(),
         timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
-        metadata(),
-        prettyPrint(),
         format.errors({ stack: true }),
         logFormat,
         simple()
