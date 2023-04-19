@@ -1,6 +1,6 @@
 # Getting Started
 
-This project was bootstrapped with [Create React App] and Express.
+This project was bootstrapped with Create React App and Express.
 
 ## Available Scripts
 
