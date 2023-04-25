@@ -1,11 +1,13 @@
-const buildProLogger = require("./pro-logger");
-const buildDevLogger = require("./dev-logger");
+import buildProLogger from './pro-logger.js';
+import buildDevLogger from './dev-logger.js';
 
+// eslint-disable-next-line import/no-mutable-exports
 let logger = null;
-if (process.env.NODE_ENV === "development") {
-    logger = new buildDevLogger();
+
+if (process.env.NODE_ENV === 'development') {
+  logger = buildDevLogger();
 } else {
-    logger = new buildProLogger();
+  logger = buildProLogger();
 }
 
-module.exports = logger;
+export default logger;

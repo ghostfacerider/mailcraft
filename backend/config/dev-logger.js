@@ -1,40 +1,42 @@
-const appRoot = require("app-root-path");
-const { func } = require("joi");
-const {format, createLogger, transports} = require("winston");
-const {timestamp, combine, printf, errors, json, simple} = format;
+import appRoot from 'app-root-path';
+import { format, createLogger, transports } from 'winston';
 
-function buildDevLogger(){
-  const logFormat = printf(({ level, message, timestamp, stack }) => {
-    return `${timestamp} ${level}: ${stack || message}`;
-  })
+const {
+  timestamp, combine, printf, errors, json, simple,
+} = format;
+
+export default function buildDevLogger() {
+  const logFormat = printf(({
+    level, message, timestamp: ts, stack,
+  }) => `${ts} ${level}: ${stack || message}`);
   // define the custom settings for each transport (file, console)
   const options = {
     file: {
-      level: "debug",
+      level: 'debug',
       filename: `${appRoot}/logs/app.log`,
       handleExceptions: true,
       maxsize: 5242880, // 5MB
       maxFiles: 5,
       format: combine(
-        timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
+        timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         errors({ stack: true }),
         logFormat,
-        json()
+        json(),
       ),
     },
     console: {
-      level: "debug",
+      level: 'debug',
       handleExceptions: true,
       format: combine(
         format.colorize(),
-        timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
+        timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         format.errors({ stack: true }),
         logFormat,
-        simple()
+        simple(),
       ),
     },
   };
-  
+
   // instantiate a new Winston Logger with the settings defined above
   const logger = createLogger({
     transports: [
@@ -43,17 +45,14 @@ function buildDevLogger(){
     ],
     exitOnError: false, // do not exit on handled exceptions
   });
-  
+
   // create a stream object with a 'write' function that will be used by `morgan`
   logger.stream = {
-    write: function (message, encoding) {
+    write(message) {
       // use the 'info' log level so the output will be picked up by both
       // transports (file and console)
       logger.info(message);
     },
   };
-  
+  return logger;
 }
-
-
-module.exports = buildDevLogger
