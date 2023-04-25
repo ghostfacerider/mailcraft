@@ -1,41 +1,13 @@
-import appRoot from 'app-root-path';
-import { format, createLogger, transports } from 'winston';
+import { createLogger, transports } from 'winston';
 
-const {
-  timestamp, combine, errors, json,
-} = format;
+import format from './format.js';
 
 export default function buildProLogger() {
-  // define the custom settings for each transport (file, console)
-  const options = {
-    file: {
-      level: 'debug',
-      filename: `${appRoot}/logs/app.log`,
-      handleExceptions: true,
-      maxsize: 5242880, // 5MB
-      maxFiles: 5,
-      format: combine(
-        timestamp(),
-        errors({ stack: true }),
-        json(),
-      ),
-    },
-    console: {
-      level: 'debug',
-      handleExceptions: true,
-      format: combine(
-        timestamp(),
-        errors({ stack: true }),
-        json(),
-      ),
-    },
-  };
-
   // instantiate a new Winston Logger with the settings defined above
   const logger = createLogger({
     transports: [
-      new transports.File(options.file),
-      new transports.Console(options.console),
+      new transports.MongoDB(format.db),
+      new transports.Console(format.console),
     ],
     exitOnError: false, // do not exit on handled exceptions
   });
