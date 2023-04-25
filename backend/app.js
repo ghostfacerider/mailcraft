@@ -37,7 +37,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(cors()); // allow access from anywhere
-app.use(morgan('combined', { stream: logger.stream }));
+app.use(morgan(':method :url STATUS: :status - :response-time ms', { stream: logger.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
