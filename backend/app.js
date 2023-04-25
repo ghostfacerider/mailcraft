@@ -17,6 +17,7 @@ import router from './routes/index.js';
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
+
 // loading env variables
 dotenv.config();
 
