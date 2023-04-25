@@ -1,0 +1,16 @@
+{
+    "extends": "airbnb-base",
+    "env": {
+      "es2022": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2022
+    },
+    "rules": {
+      "import/extensions": "off",
+      "class-methods-use-this": "off"
+    }
+}
+  

@@ -1,62 +1,54 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var morgan = require("morgan");
-const passport = require("passport");
-const session = require("express-session");
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
-var cors = require("cors");
+import createError from 'http-errors';
+import express from 'express';
+import path from 'node:path';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+import passport from 'passport';
+import session from 'express-session';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import * as url from 'node:url';
 
-var winston = require("./config/index");
+import logger from './config/index.js';
+import router from './routes/index.js';
 
-console.log(winston);
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-//loading env variables
-require("dotenv").config();
+// loading env variables
+dotenv.config();
 
-//conect to our monodb
-console.log(`MONGO_DB: ${process.env.MONGO_DB}`);
+// conect to our monodb
+logger.info(`MONGO_DB: ${process.env.MONGO_DB}`);
 mongoose.connect(process.env.MONGO_DB);
 
-//import our rounters
-var indexRouter = require("./routes/api/index");
-var apiRouter = require("./routes/api"); //api = api folder
-const { log } = require("console");
-
-var app = express();
+const app = express();
+const sessionSettings = {
+  secret: (process.env.SESSION_SECRET),
+  resave: false,
+  saveUninitialized: false,
+};
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(cors()); // allow access from anywhere
-
-app.use(morgan("combined", { stream: winston.stream }));
+app.use(morgan('combined', { stream: logger.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "client/build")));
-
-app.use(
-    session({
-        secret: (process.env.SESSION_SECRET),
-        resave: false,
-        saveUninitialized: false,
-    })
-);
+app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(session(sessionSettings));
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use("/", indexRouter);
-app.use("/api", apiRouter);
-
+app.use('/api', router);
 app.use(bodyParser.json());
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    next(createError(404));
+app.use((req, res, next) => {
+  next(createError(404));
 });
 
 // error handler
@@ -77,4 +69,4 @@ app.use(function (req, res, next) {
 //     res.render("error");
 // });
 
-module.exports = app;
+export default app;
