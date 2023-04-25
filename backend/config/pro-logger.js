@@ -2,7 +2,7 @@ import appRoot from 'app-root-path';
 import { format, createLogger, transports } from 'winston';
 
 const {
-  timestamp, combine, errors, json,
+  timestamp, combine, errors, json, prettyPrint,
 } = format;
 
 export default function buildProLogger() {
@@ -16,6 +16,7 @@ export default function buildProLogger() {
       maxFiles: 5,
       format: combine(
         timestamp(),
+        prettyPrint(),
         errors({ stack: true }),
         json(),
       ),
@@ -25,6 +26,7 @@ export default function buildProLogger() {
       handleExceptions: true,
       format: combine(
         timestamp(),
+        prettyPrint(),
         errors({ stack: true }),
         json(),
       ),

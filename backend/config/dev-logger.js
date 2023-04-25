@@ -2,7 +2,7 @@ import appRoot from 'app-root-path';
 import { format, createLogger, transports } from 'winston';
 
 const {
-  timestamp, combine, printf, errors, json, simple,
+  timestamp, combine, printf, errors, json, simple, prettyPrint,
 } = format;
 
 export default function buildDevLogger() {
@@ -19,6 +19,7 @@ export default function buildDevLogger() {
       maxFiles: 5,
       format: combine(
         timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        prettyPrint(),
         errors({ stack: true }),
         logFormat,
         json(),
@@ -30,6 +31,7 @@ export default function buildDevLogger() {
       format: combine(
         format.colorize(),
         timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        prettyPrint(),
         format.errors({ stack: true }),
         logFormat,
         simple(),
