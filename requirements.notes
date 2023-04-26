@@ -1,0 +1,29 @@
+Super Admin
+- Read:Users & Agents  & admin & clients / by ID
+- Update:Users & Agents  & admin
+- Delete:Users & Agents  & admin
+- Creates:Users & Agents  & admin
+
+Admin
+- Read:Users & Agents  / by ID / Name
+- Update:Users & Agent 
+- Delete:Users & Agent 
+- Creates:Users & Agent 
+
+Agent
+- READ:Clients / by ID / Name / Account
+- Restore deleted content
+- Update:Own data / users /id (where id is their own) 
+
+
+User / Admin CRUD
+
+GET /user
+GET /user/id
+POST /user
+Update /user/id
+Delete /user/id
+
+Access:
+- If isAdmin/isSuperAdmin: create, read, update, deleted
+- If not admin: read, restore
