@@ -16,13 +16,29 @@ Agent
 - Update:Own data / users /id (where id is their own) 
 
 
-User / Admin CRUD
+SuperAdmin CRUD
+GET /Agent & Manager & Users
+GET /Agent Agent & Manager /id
+POST /Agent & Manager & User
+Update /Agent & Manager & User/id
+Delete /Agent & Manager & User/id
+View manager and agent logs
+Restore delete (soft delete)
 
-GET /user
-GET /user/id
-POST /user
-Update /user/id
+Manager CRUD
+GET /Agent
+GET /Agent/id
+POST /Agent
+Update /Agent/id
+Delete /Agent/id
+View agent logs (viewed, crud)
+Restore delete (soft delete)
+
+Agent CRUD
+GET /user/ID/ Name/Account
 Delete /user/id
+Restore delete (soft delete)
+View users logs (viewed, crud)
 
 Access:
 - If isAdmin/isSuperAdmin: create, read, update, deleted
