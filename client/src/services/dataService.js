@@ -22,7 +22,7 @@ class dataService {
   createPlayer(create, callback) {
     // console.log("create");
     axios
-      .post(`${process.env.REACT_APP_API_URL}/players`, create, {headers:{'x-auth-token':authService.getToken()}})
+      .post(`${process.env.REACT_APP_API_URL}/players`, create, {headers:{'Authorization': `Bearer ${authService.getToken()}`}})
       .then((response) => {
         if (response.status === 201) {
           console.log(response);
@@ -37,7 +37,7 @@ class dataService {
 
   updatePlayer(updateId, updatePlayer, callback) {
     axios
-      .put(`${process.env.REACT_APP_API_URL}/players/${updateId}`, updatePlayer,{headers:{'x-auth-token':authService.getToken()}})
+      .put(`${process.env.REACT_APP_API_URL}/players/${updateId}`, updatePlayer,{headers:{'Authorization': `Bearer ${authService.getToken()}`}})
       .then((response) => {
         callback()
       })
@@ -49,7 +49,7 @@ class dataService {
 
   deletePlayer(deleteId, callback) {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/players/${deleteId}`,{headers:{'x-auth-token':authService.getToken()}})
+      .delete(`${process.env.REACT_APP_API_URL}/players/${deleteId}`,{headers:{'Authorization': `Bearer ${authService.getToken()}`}})
       .then((response) => {
         callback();
       })

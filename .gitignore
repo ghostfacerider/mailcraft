@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,linux,dotenv,text
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,node,linux,dotenv,text
 
+## builds
+dist
+
 .txt
 ### dotenv ###
 .env
@@ -177,6 +180,9 @@ dist
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+
+# IntelliJ
+.idea
 
 # Local History for Visual Studio Code
 .history/
