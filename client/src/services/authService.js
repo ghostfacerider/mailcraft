@@ -3,17 +3,14 @@ import axios from "axios";
 class authService {
     signin(credentials, callback) {
         axios
-            .post(`http://localhost:3001/users/login`, credentials)
+            .post(`http://localhost:5000/login`, credentials)
             .then((response) => {
                 console.log(response);
                 if (response.status === 200) {
                     // store it
                     //*remove localStorage in the future* store in memory\
-                    console.log(response.headers);
-                    localStorage.setItem(
-                        "token",
-                        response.headers["x-auth-token"]
-                    );
+                    const token = response?.data?.access_token || "";
+                    localStorage.setItem("token", token );
                     callback(null);
                 }
             })
@@ -25,12 +22,12 @@ class authService {
 
     register(registrationData, callback) {
         axios
-            .post(`http://localhost:3001/users/register`, registrationData)
+            .post(`http://localhost:5000/register`, registrationData)
             .then((response) => {
                 if (response.status === 200) {
                     // store it
                     //*remove localStorage in the future* store in
-                    const token = response.headers["x-auth-token"];
+                    const token = response?.data?.access_token || "";
                     localStorage.setItem("token", token);
                     console.log(token);
                     console.log(response.headers);
