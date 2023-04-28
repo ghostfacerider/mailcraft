@@ -53,4 +53,5 @@ export class UsersService {
     if (!user) throw new NotFoundException();
     return user.toObject();
   }
+  super(repo, { useSoftDelete: true });
 }

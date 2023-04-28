@@ -40,6 +40,35 @@ export class User {
     maxlength: 100,
   })
   lastname: string;
+
+  role: string;
+
+  @Prop({
+    type: String,
+    default: 'user',
+  })
+  address: [{ type: object; ref: 'Address' }];
+
+  @CreateDateColumn()
+  created!: Date;
+
+  @UpdateDateColumn()
+  updated!: Date;
+
+  // Add this column to your entity!
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }
 
+function CreateDateColumn(): (target: User, propertyKey: 'created') => void {
+  throw new Error('Function not implemented.');
+}
+
+function UpdateDateColumn(): (target: User, propertyKey: 'updated') => void {
+  throw new Error('Function not implemented.');
+}
+
+function DeleteDateColumn(): (target: User, propertyKey: 'deletedAt') => void {
+  throw new Error('Function not implemented.');
+}
 export const UserSchema = SchemaFactory.createForClass(User);
