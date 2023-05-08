@@ -8,6 +8,9 @@ import { LoggerModule } from 'nestjs-pino';
 import * as path from 'path';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/roles.guard';
+import { UserModule } from './user/user.module';
+import { EmployeesController } from './employees/employees.controller';
+import { EmployeesModule } from './employees/employees.module';
 
 @Module({
   imports: [
@@ -43,8 +46,10 @@ import { RolesGuard } from './auth/roles.guard';
         useNewUrlParser: true,
       }),
     }),
+    UserModule,
+    EmployeesModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, EmployeesController],
   providers: [
     {
       provide: APP_GUARD,
