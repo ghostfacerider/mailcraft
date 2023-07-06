@@ -8,53 +8,50 @@ import { LoggerModule } from 'nestjs-pino';
 import * as path from 'path';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/roles.guard';
-import { UserModule } from './user/user.module';
+import { UsersModule } from './users/users.module';
 import { EmployeesController } from './employees/employees.controller';
 import { EmployeesModule } from './employees/employees.module';
 
 @Module({
-  imports: [
-    AuthModule,
-    UsersModule,
-    LoggerModule.forRoot({
-      pinoHttp: {
-        transport: {
-          targets: [
-            {
-              target: 'pino-pretty',
-              level: 'info',
-              options: {},
+    imports: [
+        AuthModule,
+        UsersModule,
+        LoggerModule.forRoot({
+            pinoHttp: {
+                transport: {
+                    targets: [{
+                            target: 'pino-pretty',
+                            level: 'info',
+                            options: {},
+                        },
+                        {
+                            target: 'pino/file',
+                            level: 'info',
+                            options: {
+                                destination: path.join(__dirname, '..', 'logs', 'app.log'),
+                            },
+                        },
+                    ],
+                },
             },
-            {
-              target: 'pino/file',
-              level: 'info',
-              options: {
-                destination: path.join(__dirname, '..', 'logs', 'app.log'),
-              },
-            },
-          ],
-        },
-      },
-    }),
-    ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGO_DB'),
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-      }),
-    }),
-    UserModule,
-    EmployeesModule,
-  ],
-  controllers: [AppController, EmployeesController],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
-    },
-  ],
+        }),
+        ConfigModule.forRoot({ isGlobal: true }),
+        MongooseModule.forRootAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: async (configService: ConfigService) => ({
+                uri: configService.get < string > ('MONGO_DB'),
+                useUnifiedTopology: true,
+                useNewUrlParser: true,
+            }),
+        }),
+        UsersModule,
+        EmployeesModule,
+    ],
+    controllers: [AppController, EmployeesController],
+    providers: [{
+        provide: APP_GUARD,
+        useClass: RolesGuard,
+    }, ],
 })
 export class AppModule {}

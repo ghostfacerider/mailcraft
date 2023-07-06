@@ -1,4 +1,6 @@
 export class CreateEmployeeDto {
-    employee_id: srting;
-    password: srting;
+    user_name: string;
+    first_name: string;
+    last_name: string;
+    password: string;
 }
