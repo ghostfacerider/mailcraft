@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, SchemaTypes } from 'mongoose';
+import { Addresses } from 'src/users/schema/address.schema';
 
-export type UserDocument = User & Document;
+export type UserDocument = Users & Document;
 
 @Schema({ timestamps: true })
-export class User {
+export class Users {
   @Prop({
     type: String,
     required: true,
@@ -44,11 +45,8 @@ export class User {
   })
   role: string;
 
-  @Prop({
-    type: String,
-    default: 'user',
-  })
-  address: string;
+  @Prop({ type: [{ type: SchemaTypes.ObjectId, ref: 'Address' }] })
+  addresses: Addresses[];
 
   @Prop({ default: Date.now })
   created!: Date;
@@ -64,4 +62,4 @@ export class User {
   updatedAt: string;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const UsersSchema = SchemaFactory.createForClass(Users);

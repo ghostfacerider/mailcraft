@@ -1,4 +1,4 @@
-import { User } from '../schema/user.schema';
+import { Users } from '../schema/user.schema';
 
 export class UserEntity {
   id: string;
@@ -6,7 +6,7 @@ export class UserEntity {
   firstname: string;
   lastname: string;
 
-  constructor(user: User) {
+  constructor(user: Users) {
     this.id = user._id.toString();
     this.firstname = user.firstname;
     this.lastname = user.lastname;
